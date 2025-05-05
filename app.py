@@ -25,6 +25,22 @@ def admin():
 def reservations():
     return render_template('reservations.html')
 
+#Processes navigation page with POST request
+@app.route('/', methods=('POST',))
+def index_post():
+    #get the form data
+    option = request.form.get('option')
+
+    #determine which view to send the application to
+    if option == "admin":
+        return redirect(url_for('admin'))
+    elif option == "reservations":
+        return redirect(url_for('reservations'))
+    elif option == "index":
+        return redirect(url_for('index'))
+    else:
+        flash("ERROR: You must choose an option from the menu")
+        return redirect(url_for('navigation'))
 
 #run the application
 app.run(port=5008, debug=True)
