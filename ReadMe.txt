@@ -10,6 +10,6 @@ Setup instructions:
 
 	If you wish to run in a container:
 		Enter the command "docker compose up --build"
-		Navigate to http://127.0.0.1:5008/	
+		Navigate to http://127.0.0.1:5008/ or "localhost:5008"
 
 	
