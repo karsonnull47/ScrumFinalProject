@@ -1,5 +1,82 @@
 {% extends 'base.html' %}
 
 {% block content %}
-		<h1 align="center">Reservations Page Placeholder</h1>
+		<style>
+			.reserved {
+				background-color: #ff6b6b;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+			}
+			.available {
+				background-color: #4caf50;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+			}
+		</style>
+		<h1 class="title has-text-centered">Seating Chart</h1>
+		<div class="table-container" style="display: flex; justify-content: center;">
+			<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" style="width: auto;">
+				<thead>
+					<tr>
+						<th>Row \ Column</th>
+						{% for col in range(1,5) %}
+							<th>{{ col }}</th>
+						{% endfor %}
+					</tr>
+				</thead>
+				<tbody>
+					{% for row_index in range(1, 13) %}
+						<tr>
+							<th>{{ row_index }}</th>
+							{% for col_index in range(1, 5) %}
+								{% set seat = seating_chart[row_index-1][col_index-1] %}
+								<td class="{{ 'reserved' if seat else 'available' }}">
+									{{ 'Occupied' if seat else 'Available' }}
+								</td>
+							{% endfor %}
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<h2 class="subtitle has-text-centered">Reserve a Seat</h2>
+		<form method="POST" action="{{ url_for('reservations') }}" style="max-width: 400px; margin: 0 auto;">
+    		<div class="field">
+        		<label class="label">First Name</label>
+        		<div class="control">
+           		 <input class="input" type="text" name="first_name" required>
+        		</div>
+    		</div>
+
+    		<div class="field">
+       		 <label class="label">Last Name</label>
+        		<div class="control">
+            		<input class="input" type="text" name="last_name" required>
+        		</div>
+    		</div>
+
+			<div class="field">
+				<label class="label">Seat Row (1-12)</label>
+				<div class="control">
+					<input class="input" type="number" name="seat_row" min="1" max="12" required>
+				</div>
+			</div>
+
+			<div class="field">
+				<label class="label">Seat Column (1-4)</label>
+				<div class="control">
+					<input class="input" type="number" name="seat_column" min="1" max="4" required>
+				</div>
+			</div>
+
+			<div class="field">
+				<div class="control">
+					<button class="button is-primary" type="submit">Reserve Seat</button>
+				</div>
+			</div>
+		</form>
+		
 {% endblock %}
