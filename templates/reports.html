@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% if reservations_result %}
+<table style="width:40%;" border="1">
+    <tr>
+    <th>Header 1</th>
+    <th>Header 2</th>
+    </tr>
+    {% for record in reservations_result %}
+        <tr style="font-size: 12px;">
+        <td align="left">
+            {{ record["field"]}}
+        </td>
+        <td align="left">
+            {{ record["another_field"]}}
+        </td>
+        <td align="left">
+            {{ record["a_third_field"]}}
+        </td>
+        <td align="left">
+            ${{ record["totalOrders"]}}<br>
+        </td>
+    {% endfor %}
+    </tr>
+</table>
+{% endif %}

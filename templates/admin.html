@@ -2,4 +2,19 @@
 
 {% block content %}
 <h1 align="center">Admin Page Placeholder</h1>
+<table style="width:60%;" border="2" align="center">
+    <tr>
+    <th style="background-color:white;" align="left">
+    <for action="login" method="post">  
+        <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+        <button type="submit">Login</button>
+        </div>
+  </form>
+    </th>
+    </tr>
+</table>
 {% endblock %}

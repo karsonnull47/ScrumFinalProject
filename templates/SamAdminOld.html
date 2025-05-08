@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 align="center">Admin Page</h1>
+<h1 align="center">Reserved Seats</h1>
+<table style="width:60%;" border="2" align="center">
+    <tr >
+    <th style="background-color:white;" align="left">
+          <h1 align="center">IT-4320 Trip Reservation System</h1>
+          <h5>Welcome to the IT-4320 reservation system. Use the select box to choose whether to make a reservation or log in as an administrator.</h2>
+          <br>
+          <form method="POST" action="#">
+              <label for="agent_name">Choose Menu Option:</label><br>
+              <select id="option" name="option" size="1">
+                  <option value="index">Choose an Option</option>
+                  <option value="admin">Admin Login</option>
+                  <option value="reservations">Reserve a Seat</option>
+              </select>
+              <br><br>
+              <button type="submit">Submit</button>
+          </form>
+      </th>
+      </tr>
+</table>
+<ul>
+    {% for reserv in reservations %}
+        <li>
+            {{ reserv.passengerName }} - ID: {{ reserv.id }} - Seat Number: {{reserv.seatRow}} , {{reserv.seatColumn}} - eTicket Number: {{reserv.eTicketNumber}} - Created: {{ reserv.created('%Y-%m-%d')}}
+            <div>
+                <form action="{{ url_for('delete_task', id=reserv.id) }}" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+</ul>
+{% endblock %}
