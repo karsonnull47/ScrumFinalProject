@@ -1,5 +1,6 @@
 #import modules
 from flask import Flask, render_template, request, flash, url_for, redirect
+import sqlite3
 
 #create a flask app object and set app variables
 app = Flask(__name__)
