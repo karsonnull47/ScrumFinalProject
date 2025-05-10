@@ -9,7 +9,8 @@ app.secret_key = 'your secret key'
 
 #create a connection object to the module2 database
 def get_db_connection():
-
+    mydb = sqlite3.connect('reservations.db')
+    mydb.row_factory = sqlite3.Row
     return mydb
 
 #use app.route to create a flask view for the index page of the web app
