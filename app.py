@@ -21,6 +21,22 @@ def index():
 
 @app.route('/admin', methods=('GET',))
 def admin():
+    if request.method == 'POST':
+        username = request.form['uname']
+        password = request.form['psw']
+
+        conn = get_db_connection()
+        admin = conn.execute(
+            'SELECT * FROM admins WHERE username = ? AND password = ?',
+            (username, password)
+        ).fetchone()
+        conn.close()
+
+        if admin:
+            flash("Login Successful!", "success")
+        else:
+            flash("Login Failed!", "error")
+        
     return render_template('admin.html')
 
 
